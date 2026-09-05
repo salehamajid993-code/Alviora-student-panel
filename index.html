@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alviora Learn — Learn Smarter. Discover More.</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🜁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Razorpay Checkout Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#F6F7FB;
+  --bg-deep:#EFF0FA;
+  --surface:#FFFFFF;
+  --ink:#14131F;
+  --muted:#6B6B7D;
+  --faint:#9A9AAC;
+  --line:#E5E5F0;
+  --violet:#5B4FE0;
+  --violet-deep:#3E33B8;
+  --violet-ink:#2A2270;
+  --violet-tint:#EEECFC;
+  --gold:#C98A2E;
+  --gold-tint:#FBF1DF;
+  --green:#2F8F5B;
+  --green-tint:#E6F5EC;
+  --red:#C2453B;
+  --red-tint:#FBEAE8;
+  --radius-lg:22px;
+  --radius-md:14px;
+  --radius-sm:9px;
+  --shadow:0 1px 2px rgba(20,19,31,.04), 0 12px 32px -16px rgba(20,19,31,.16);
+  --shadow-sm:0 1px 2px rgba(20,19,31,.06);
+  font-size:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+h1,h2,h3,h4,.serif{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-.01em; margin:0}
+p{margin:0}
+a{color:inherit; text-decoration:none}
+button{font-family:inherit; cursor:pointer}
+img{max-width:100%; display:block}
+::selection{background:var(--violet); color:#fff}
+:focus-visible{outline:2px solid var(--violet); outline-offset:2px}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+
+.wrap{max-width:1160px; margin:0 auto; padding:0 24px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 22px; border-radius:100px; font-weight:600; font-size:.95rem;
+  border:1px solid transparent; transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--violet); color:#fff; box-shadow:0 10px 24px -10px rgba(91,79,224,.55)}
+.btn-primary:hover{background:var(--violet-deep)}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-soft{background:var(--violet-tint); color:var(--violet-ink)}
+.btn-soft:hover{background:#E2DEFB}
+.btn-danger{background:var(--red-tint); color:var(--red)}
+.btn-block{width:100%}
+.btn-sm{padding:9px 16px; font-size:.85rem}
+.pill{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:100px; font-size:.78rem; font-weight:600}
+.pill-violet{background:var(--violet-tint); color:var(--violet-ink)}
+.pill-gold{background:var(--gold-tint); color:var(--gold)}
+.pill-green{background:var(--green-tint); color:var(--green)}
+.pill-red{background:var(--red-tint); color:var(--red)}
+.pill-line{background:#fff; border:1px solid var(--line); color:var(--muted)}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm)}
+.muted{color:var(--muted)}
+.faint{color:var(--faint)}
+input,select,textarea{
+  width:100%; padding:11px 14px; border-radius:var(--radius-sm); border:1px solid var(--line);
+  background:#fff; font-family:inherit; font-size:.92rem; color:var(--ink);
+}
+textarea{resize:vertical; min-height:80px}
+label{font-size:.82rem; font-weight:600; color:var(--muted); display:block; margin-bottom:6px}
+.field{margin-bottom:14px}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+
+/* ============ TOPNAV (public) ============ */
+.pubnav{position:sticky; top:0; z-index:40; background:rgba(246,247,251,.82); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.pubnav .row{display:flex; align-items:center; justify-content:space-between; padding:16px 24px}
+.brand{display:flex; align-items:center; gap:9px; font-family:'Fraunces',serif; font-weight:600; font-size:1.18rem}
+.brand .mark{width:30px; height:30px; border-radius:9px; background:linear-gradient(155deg,var(--violet),var(--violet-deep)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:.95rem}
+.pubnav-links{display:flex; gap:28px; align-items:center}
+.pubnav-links a{font-size:.9rem; font-weight:500; color:var(--muted)}
+.pubnav-links a:hover{color:var(--ink)}
+.pubnav-cta{display:flex; gap:10px; align-items:center}
+@media (max-width:820px){.pubnav-links{display:none}}
+
+/* ============ HERO ============ */
+.hero{padding:76px 0 40px; position:relative; overflow:hidden}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero-eyebrow{display:inline-flex; align-items:center; gap:8px; color:var(--violet-ink); background:var(--violet-tint); padding:7px 14px; border-radius:100px; font-size:.8rem; font-weight:600; margin-bottom:22px}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem); line-height:1.06; letter-spacing:-.02em}
+.hero h1 em{font-style:italic; color:var(--violet)}
+.hero-sub{margin-top:20px; font-size:1.1rem; color:var(--muted); max-width:480px; line-height:1.6}
+.hero-ctas{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap}
+.hero-proof{display:flex; gap:26px; margin-top:38px; flex-wrap:wrap}
+.hero-proof div b{display:block; font-family:'Fraunces',serif; font-size:1.4rem}
+.hero-proof div span{font-size:.78rem; color:var(--muted)}
+
+.hero-stage{position:relative; height:460px}
+.blob{position:absolute; border-radius:50%; filter:blur(2px); opacity:.55}
+.float-card{position:absolute; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:14px 16px; font-size:.82rem; animation:drift 7s ease-in-out infinite}
+.float-card b{display:block; font-family:'Fraunces',serif; font-size:1.05rem; font-weight:600}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.fc1{top:8%; left:2%; animation-delay:.2s}
+.fc2{top:2%; right:4%; animation-delay:1.1s}
+.fc3{bottom:30%; left:14%; animation-delay:.6s}
+.fc4{bottom:6%; right:8%; animation-delay:1.6s}
+.fc5{top:42%; left:38%; animation-delay:2s}
+
+/* ============ SECTIONS ============ */
+section{padding:70px 0}
+.section-head{max-width:560px; margin-bottom:40px}
+.eyebrow-label{color:var(--violet); font-weight:700; font-size:.82rem; letter-spacing:.01em}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.3rem); margin-top:10px}
+.section-head p{margin-top:12px; color:var(--muted); font-size:1.02rem}
+
+.feature-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+@media (max-width:900px){.feature-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.feature-grid{grid-template-columns:1fr}}
+.feature-card{padding:26px; transition:transform .18s ease, box-shadow .18s ease}
+.feature-card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+.feature-ic{width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; margin-bottom:16px}
+.feature-card h4{font-size:1.02rem; margin-bottom:8px}
+.feature-card p{font-size:.88rem; color:var(--muted); line-height:1.55}
+
+.strip{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden}
+@media (max-width:800px){.strip{grid-template-columns:repeat(2,1fr)}}
+.strip>div{background:#fff; padding:28px 22px}
+.strip .num{font-family:'Fraunces',serif; font-size:1.6rem; color:var(--violet)}
+.strip h5{margin-top:8px; font-size:.95rem}
+.strip p{margin-top:6px; font-size:.83rem; color:var(--muted)}
+
+.mystery-band{background:linear-gradient(160deg,#1B1730,#2A2270 55%,#3E33B8); border-radius:var(--radius-lg); padding:52px; color:#fff; position:relative; overflow:hidden}
+.mystery-band::before{content:"";position:absolute; inset:0; background:radial-gradient(600px 300px at 85% 10%, rgba(201,138,46,.25), transparent 60%)}
+.mystery-inner{position:relative; display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center}
+@media (max-width:800px){.mystery-inner{grid-template-columns:1fr}}
+.mystery-band .eyebrow-label{color:#D9C68A}
+.mystery-band h2{color:#fff; margin-top:10px}
+.mystery-band p{color:#C9C6E6; margin-top:14px; font-size:1rem; line-height:1.6}
+.clue-card{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:20px; backdrop-filter:blur(6px)}
+.clue-card .tag{font-size:.72rem; letter-spacing:.04em; color:#D9C68A; font-weight:700}
+.clue-card p{color:#EDEBFA; margin-top:8px; font-size:.92rem}
+
+.pricing-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+@media (max-width:960px){.pricing-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.pricing-grid{grid-template-columns:1fr}}
+.price-card{padding:26px; display:flex; flex-direction:column; gap:16px}
+.price-card.featured{border-color:var(--violet); box-shadow:0 0 0 3px var(--violet-tint)}
+.price-card .amt{font-family:'Fraunces',serif; font-size:2rem}
+.price-card .amt span{font-size:.85rem; color:var(--muted); font-family:'Inter',sans-serif; font-weight:500}
+.price-card ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; font-size:.86rem; color:var(--muted); flex:1}
+.price-card li::before{content:"✓ "; color:var(--green); font-weight:700}
+
+.faq-item{border-bottom:1px solid var(--line); padding:18px 0}
+.faq-item summary{cursor:pointer; font-weight:600; list-style:none; display:flex; justify-content:space-between; align-items:center}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+"; color:var(--violet); font-size:1.3rem; font-weight:400}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{margin-top:12px; color:var(--muted); font-size:.92rem; line-height:1.6}
+
+footer.pubfoot{border-top:1px solid var(--line); padding:48px 0 30px}
+.foot-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px}
+.foot-links{display:flex; gap:22px; flex-wrap:wrap; font-size:.86rem; color:var(--muted)}
+.foot-bottom{margin-top:34px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.78rem; color:var(--faint); border-top:1px solid var(--line); padding-top:18px}
+
+/* ============ AUTH ============ */
+.auth-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg); padding:24px}
+.auth-box{width:100%; max-width:400px}
+.auth-box .card{padding:32px}
+.auth-tabs{display:flex; background:var(--bg-deep); border-radius:100px; padding:4px; margin-bottom:24px}
+.auth-tabs button{flex:1; padding:10px; border:none; background:transparent; border-radius:100px; font-weight:600; font-size:.88rem; color:var(--muted)}
+.auth-tabs button.active{background:#fff; color:var(--ink); box-shadow:var(--shadow-sm)}
+.auth-switch{text-align:center; margin-top:6px; font-size:.85rem; color:var(--muted)}
+.auth-switch b{color:var(--violet); cursor:pointer}
+.auth-hint{background:var(--violet-tint); color:var(--violet-ink); border-radius:var(--radius-sm); padding:10px 12px; font-size:.78rem; margin-bottom:16px}
+.back-link{display:inline-flex; align-items:center; gap:6px; margin-bottom:20px; font-size:.85rem; color:var(--muted)}
+
+/* ============ APP SHELL (student) ============ */
+.app-shell{min-height:100vh; display:flex}
+.side{width:230px; flex-shrink:0; background:#fff; border-right:1px solid var(--line); padding:22px 16px; display:flex; flex-direction:column; position:sticky; top:0; height:100vh}
+.side .brand{padding:0 8px 22px; border-bottom:1px solid var(--line); margin-bottom:16px}
+.side nav{display:flex; flex-direction:column; gap:3px; flex:1}
+.side nav a{display:flex; align-items:center; gap:11px; padding:10px 12px; border-radius:11px; font-size:.88rem; font-weight:500; color:var(--muted)}
+.side nav a .ic{width:20px; text-align:center}
+.side nav a.active{background:var(--violet-tint); color:var(--violet-ink); font-weight:600}
+.side nav a:hover:not(.active){background:var(--bg-deep); color:var(--ink)}
+.side-foot{border-top:1px solid var(--line); padding-top:14px; display:flex; align-items:center; gap:10px}
+.avatar{width:34px; height:34px; border-radius:50%; background:linear-gradient(155deg,var(--violet),var(--gold)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:.85rem; flex-shrink:0}
+.main{flex:1; min-width:0}
+.topbar{display:flex; align-items:center; justify-content:space-between; padding:18px 30px; border-bottom:1px solid var(--line); background:rgba(246,247,251,.9); backdrop-filter:blur(8px); position:sticky; top:0; z-index:20}
+.topbar .search{display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line); border-radius:100px; padding:9px 16px; width:280px; font-size:.85rem; color:var(--muted)}
+.topbar-right{display:flex; align-items:center; gap:14px}
+.icon-btn{width:38px; height:38px; border-radius:50%; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; position:relative}
+.dot-badge{position:absolute; top:6px; right:7px; width:7px; height:7px; border-radius:50%; background:var(--red)}
+.content{padding:28px 30px 90px; max-width:1140px}
+@media (max-width:900px){
+  .side{display:none}
+  .topbar{padding:14px 18px}
+  .content{padding:18px 16px 100px}
+  .topbar .search{display:none}
+}
+
+.bottomnav{display:none}
+@media (max-width:900px){
+  .bottomnav{display:flex; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid var(--line); z-index:30; padding:8px 6px 10px}
+  .bottomnav a{flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:.65rem; color:var(--muted); font-weight:600; padding:5px}
+  .bottomnav a .ic{font-size:1.15rem}
+  .bottomnav a.active{color:var(--violet)}
+}
+
+/* dashboard */
+.hello{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:24px}
+.hello h2{font-size:1.6rem}
+.stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px}
+@media (max-width:800px){.stat-row{grid-template-columns:repeat(2,1fr)}}
+.stat-card{padding:18px 20px}
+.stat-card .top{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px}
+.stat-card .ic{font-size:1.2rem}
+.stat-card .val{font-family:'Fraunces',serif; font-size:1.6rem}
+.stat-card .lbl{font-size:.78rem; color:var(--muted); margin-top:2px}
+.bar-track{height:7px; border-radius:100px; background:var(--bg-deep); overflow:hidden; margin-top:10px}
+.bar-fill{height:100%; border-radius:100px; background:linear-gradient(90deg,var(--violet),var(--violet-deep))}
+
+.quick-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:30px}
+@media (max-width:800px){.quick-grid{grid-template-columns:repeat(2,1fr)}}
+.quick-card{padding:20px; display:flex; align-items:center; gap:14px; transition:transform .15s}
+.quick-card:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+.quick-card .ic{width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0}
+.quick-card h5{font-size:.94rem}
+.quick-card span{font-size:.76rem; color:var(--muted)}
+
+.section-title{display:flex; justify-content:space-between; align-items:center; margin:34px 0 16px}
+.section-title h3{font-size:1.15rem}
+.two-col{display:grid; grid-template-columns:1.5fr 1fr; gap:20px}
+@media (max-width:900px){.two-col{grid-template-columns:1fr}}
+.activity-item{display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:.86rem}
+.activity-item:last-child{border-bottom:none}
+.activity-ic{width:30px; height:30px; border-radius:9px; background:var(--violet-tint); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.9rem}
+.announce-item{padding:13px; border-radius:12px; background:var(--gold-tint); font-size:.82rem; margin-bottom:10px}
+.announce-item b{display:block; margin-bottom:3px; color:#8A5F1D}
+
+/* content grids/lists */
+.filter-row{display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; align-items:center}
+.filter-row select, .filter-row input{width:auto; min-width:140px}
+.content-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+@media (max-width:900px){.content-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.content-grid{grid-template-columns:1fr}}
+.res-card{padding:18px; display:flex; flex-direction:column; gap:10px; cursor:pointer; transition:transform .15s, box-shadow .15s}
+.res-card:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+.res-thumb{height:96px; border-radius:12px; background:linear-gradient(140deg,var(--violet-tint),var(--gold-tint)); display:flex; align-items:center; justify-content:center; font-size:1.8rem}
+.res-card h5{font-size:.95rem; line-height:1.35}
+.res-meta{display:flex; gap:6px; flex-wrap:wrap}
+.res-foot{display:flex; justify-content:space-between; align-items:center; margin-top:auto; font-size:.76rem; color:var(--muted)}
+
+.detail-head{margin-bottom:20px}
+.detail-head h2{font-size:1.5rem; margin-bottom:8px}
+.iframe-wrap{position:relative; padding-top:56.25%; border-radius:16px; overflow:hidden; background:#000; margin-bottom:20px}
+.iframe-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.prose{font-size:.95rem; line-height:1.75; color:var(--ink)}
+.prose p{margin-bottom:12px}
+
+/* quiz/pyq attempt */
+.quiz-progress{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; font-size:.85rem; color:var(--muted)}
+.opt{display:flex; align-items:center; gap:12px; padding:14px 16px; border:1.5px solid var(--line); border-radius:14px; margin-bottom:10px; cursor:pointer; font-size:.92rem; transition:border-color .12s, background .12s}
+.opt:hover{border-color:var(--violet)}
+.opt.selected{border-color:var(--violet); background:var(--violet-tint)}
+.opt.correct{border-color:var(--green); background:var(--green-tint)}
+.opt.incorrect{border-color:var(--red); background:var(--red-tint)}
+.opt .letter{width:26px; height:26px; border-radius:50%; background:var(--bg-deep); display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700; flex-shrink:0}
+.result-hero{text-align:center; padding:40px 20px}
+.result-ring{width:130px; height:130px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:2rem; background:conic-gradient(var(--violet) calc(var(--pct)*1%), var(--bg-deep) 0)}
+.result-ring span{width:104px; height:104px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center}
+
+/* AI Teacher */
+.chat-wrap{display:flex; flex-direction:column; height:calc(100vh - 180px); min-height:400px}
+.chat-msgs{flex:1; overflow-y:auto; padding:10px 4px; display:flex; flex-direction:column; gap:16px}
+.msg{max-width:78%; padding:13px 16px; border-radius:16px; font-size:.9rem; line-height:1.6; white-space:pre-wrap; word-break:break-word}
+.msg.user{align-self:flex-end; background:var(--violet); color:#fff; border-bottom-right-radius:5px}
+.msg.ai{align-self:flex-start; background:#fff; border:1px solid var(--line); border-bottom-left-radius:5px}
+.msg.ai b{display:block; font-size:.72rem; color:var(--violet); margin-bottom:6px; letter-spacing:.02em}
+.chat-actions{display:flex; gap:8px; flex-wrap:wrap; margin:16px 0}
+.chip{padding:8px 14px; border-radius:100px; border:1px solid var(--line); background:#fff; font-size:.8rem; font-weight:500}
+.chip:hover{border-color:var(--violet); color:var(--violet)}
+.chat-input{display:flex; gap:10px; margin-top:14px}
+.chat-input input{flex:1}
+
+/* modal */
+.modal-bg{position:fixed; inset:0; background:rgba(20,19,31,.5); backdrop-filter:blur(2px); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px}
+.modal{background:#fff; border-radius:20px; max-width:560px; width:100%; max-height:88vh; overflow-y:auto; padding:26px}
+.modal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px}
+.modal-head h3{font-size:1.15rem}
+.close-x{width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center}
+
+/* toast */
+#toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%); background:var(--ink); color:#fff; padding:12px 22px; border-radius:100px; font-size:.85rem; z-index:200; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; box-shadow:var(--shadow)}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(-6px)}
+
+/* empty state */
+.empty{text-align:center; padding:60px 20px; color:var(--muted)}
+.empty .ic{font-size:2.2rem; margin-bottom:14px}
+.empty h4{color:var(--ink); margin-bottom:6px}
+
+/* admin */
+.adm-side{background:#14131F; color:#fff; border-right:none}
+.adm-side .brand{border-color:rgba(255,255,255,.1); color:#fff}
+.adm-side nav a{color:#A6A4C0}
+.adm-side nav a.active{background:rgba(91,79,224,.35); color:#fff}
+.adm-side nav a:hover:not(.active){background:rgba(255,255,255,.06); color:#fff}
+.adm-side .side-foot{border-color:rgba(255,255,255,.1)}
+.adm-side .navlabel{font-size:.68rem; text-transform:none; color:#6E6C90; padding:14px 12px 4px; font-weight:600}
+.adm-badge{display:inline-flex; align-items:center; gap:6px; background:var(--gold-tint); color:var(--gold); padding:4px 10px; border-radius:100px; font-size:.72rem; font-weight:700}
+
+table{width:100%; border-collapse:collapse; font-size:.86rem}
+thead th{text-align:left; padding:10px 14px; color:var(--muted); font-weight:600; font-size:.76rem; text-transform:uppercase; letter-spacing:.02em; border-bottom:1px solid var(--line)}
+tbody td{padding:13px 14px; border-bottom:1px solid var(--line); vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--bg)}
+.table-wrap{overflow-x:auto}
+.row-actions{display:flex; gap:6px}
+.icon-sm{width:30px; height:30px; border-radius:9px; border:1px solid var(--line); background:#fff; display:flex; align-items:center; justify-content:center; font-size:.85rem}
+.icon-sm:hover{border-color:var(--violet)}
+
+.kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px}
+@media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{padding:18px 20px}
+.kpi .lbl{font-size:.78rem; color:var(--muted); margin-bottom:8px}
+.kpi .val{font-family:'Fraunces',serif; font-size:1.7rem}
+.kpi .delta{font-size:.76rem; margin-top:6px}
+.delta.up{color:var(--green)}
+
+.bars{display:flex; flex-direction:column; gap:12px}
+.bars .brow{display:grid; grid-template-columns:120px 1fr 50px; align-items:center; gap:10px; font-size:.82rem}
+.brow .track{height:9px; background:var(--bg-deep); border-radius:100px; overflow:hidden}
+.brow .fill{height:100%; background:linear-gradient(90deg,var(--violet),var(--gold))}
+
+.page-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; flex-wrap:wrap; gap:12px}
+.page-head h2{font-size:1.4rem}
+.status-tag{padding:3px 10px; border-radius:100px; font-size:.72rem; font-weight:700}
+.qbuild-item{border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px}
+.qbuild-item .qhead{display:flex; justify-content:space-between; margin-bottom:10px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+
+<!-- SHARED DATA LAYER — single source of truth -->
+<script src="alviora-db.js"></script>
+<script>
+/* =========================================================================
+   AI API CONFIGURATION
+   ========================================================================= */
+const AI_CONFIG = {
+  primaryKey: "", // MOVED SERVER-SIDE: do not expose API secrets in browser
+  backupKey: "", // MOVED SERVER-SIDE: do not expose API secrets in browser
+  model: "google/gemini-2.5-flash",
+  endpoint: "https://openrouter.ai/api/v1/chat/completions"
+};
+
+/* =========================================================================
+   SECURE PLAN / PAYMENT ACCESS LAYER
+   Production paid-access authority MUST be the backend. Required endpoints:
+     POST /api/payments/create-order
+     POST /api/payments/verify
+     GET  /api/access/me
+   If these endpoints are unavailable, paid access fails closed.
+   ========================================================================= */
+const RAZORPAY_KEY_ID = "rzp_test_TXzFvk0DEbT2mk";
+const PAYMENT_API_BASE = "http://127.0.0.1:3000";
+const ENTITLEMENTS = Object.freeze({NOTES_FREE:'notes_free',NOTES_PREMIUM:'notes_premium',VIDEOS_FREE:'videos_free',VIDEOS_PREMIUM:'videos_premium',PYQ_BASIC:'pyq_basic',PYQ_FULL:'pyq_full',QUIZ_BASIC:'quiz_basic',QUIZ_PREMIUM:'quiz_premium',AI_TEACHER:'ai_teacher',AI_TEACHER_EXTENDED:'ai_teacher_extended',ASK_NOTES_AI:'ask_notes_ai',AI_VIVA:'ai_viva',LEADERBOARD:'leaderboard',DOWNLOADS:'downloads',PREMIUM_RESOURCES:'premium_resources',EXAM_CONTENT:'exam_content',SEMESTER_CONTENT:'semester_content'});
+function planEntitlements(plan){return plan&&Array.isArray(plan.entitlements)?plan.entitlements.filter(Boolean).map(String):[]}
+function getPlanById(db,planId){return (db.plans||[]).find(p=>p&&p.id===planId&&p.active!==false&&p.status!=='inactive')||null}
+function getActiveSubscription(studentId,db=loadDB()){if(!studentId)return null;const now=Date.now();const subs=(db.subscriptions||[]).filter(x=>x&&x.studentId===studentId&&x.status==='active').filter(x=>!x.expiresAt||new Date(x.expiresAt).getTime()>now).sort((a,b)=>new Date(b.startedAt||0)-new Date(a.startedAt||0));for(const sub of subs){const plan=getPlanById(db,sub.planId);if(!plan)continue;const adminGranted=sub.grantedByAdmin===true;const payment=(db.payments||[]).find(p=>p&&p.id===sub.paymentId&&p.studentId===studentId&&['paid','captured','verified','success'].includes(String(p.status||'').toLowerCase())&&p.verified===true);if(!payment&&!adminGranted)continue;if(!adminGranted&&sub.paymentAmount!=null&&Number(sub.paymentAmount)!==Number(plan.price))continue;if(sub.startedAt&&now<new Date(sub.startedAt).getTime())continue;if(sub.expiresAt&&now>=new Date(sub.expiresAt).getTime())continue;return {active:true,subscription:sub,plan,entitlements:planEntitlements(plan),expiresAt:sub.expiresAt||null}}return null}
+function getEffectiveSubscription(studentId,db=loadDB()){const active=getActiveSubscription(studentId,db);if(active)return active;const free=(db.plans||[]).find(p=>p&&p.id==='plan-free'&&p.active!==false&&p.status!=='inactive');return {active:false,subscription:null,plan:free||null,entitlements:planEntitlements(free),expiresAt:null}}
+function getStudentEntitlements(studentId){return getEffectiveSubscription(studentId).entitlements}
+function hasEntitlement(studentId,featureKey){return !!studentId&&getStudentEntitlements(studentId).includes(featureKey)}
+function requiredEntitlement(item){if(!item)return null;if(item.requiredEntitlement)return String(item.requiredEntitlement);if(item.access==='free')return null;if(item.youtubeId||item.type==='video')return ENTITLEMENTS.VIDEOS_PREMIUM;if(item.answer||item.question||item.type==='pyq')return ENTITLEMENTS.PYQ_FULL;if(item.questions||item.type==='quiz')return ENTITLEMENTS.QUIZ_PREMIUM;return ENTITLEMENTS.NOTES_PREMIUM}
+function canAccess(student,item){if(!student||student.status==='inactive')return false;const req=requiredEntitlement(item);return !req||hasEntitlement(student.id,req)}
+async function secureApi(path,options={}){const res=await fetch(PAYMENT_API_BASE+path,{credentials:'include',headers:{'Content-Type':'application/json',...(options.headers||{})},...options});if(!res.ok)throw new Error('Secure API request failed');return res.json()}
+async function initiatePayment(planId){const student=currentStudent();if(!student){toast('Please sign in first.');return}const db=loadDB(),plan=getPlanById(db,planId);if(!plan||Number(plan.price)<=0){toast('Invalid plan.');return}let order;try{order=await secureApi('/api/payments/create-order',{method:'POST',body:JSON.stringify({planId,studentId:student.id})})}catch(e){toast('Secure payment service is unavailable.');return}if(!order||!order.orderId||Number(order.amount)!==Math.round(Number(plan.price)*100)){toast('Payment order validation failed.');return}const options={key:RAZORPAY_KEY_ID,amount:order.amount,currency:order.currency||'INR',name:'Alviora Learn',description:'Subscription for '+plan.name,order_id:order.orderId,handler:async function(response){try{const verified=await secureApi('/api/payments/verify',{method:'POST',body:JSON.stringify({razorpay_order_id:response.razorpay_order_id,razorpay_payment_id:response.razorpay_payment_id,razorpay_signature:response.razorpay_signature,planId,studentId:student.id})});if(!verified||verified.verified!==true||verified.planId!==plan.id){toast('Payment could not be verified. No premium access granted.');return}const local=loadDB(),st=local.students.find(x=>x.id===student.id);if(st&&verified.subscription){st.subscription=verified.subscription.planName==='Free'?'free':'paid';st.planName=verified.subscription.planName;st.subscriptionId=verified.subscription.id||null;st.subscriptionExpiresAt=verified.subscription.expiresAt||null;saveStudent(local,st);saveDB(local)}toast('Payment verified — '+plan.name+' activated.');render()}catch(e){toast('Payment verification failed. No premium access granted.')}},prefill:{name:student.name||'',email:student.email||''},theme:{color:'#5B4FE0'}};const rzp=new Razorpay(options);rzp.on('payment.failed',()=>toast('Payment failed. No premium access granted.'));rzp.open()}
+
+/* =========================================================================
+   DATA LAYER
+   ========================================================================= */
+initializeDBIfNeeded();
+
+function ensureDefaultPlans(){
+  const db = loadDB();
+  if (!Array.isArray(db.plans)) db.plans = [];
+
+  const defaults = [
+    { id:'plan-free', name:'Free', price:0, duration:'forever', durationDays:null, featured:false, active:true, status:'published', displayOrder:1, features:['Free notes & videos','Free quizzes','5 AI questions/day'], entitlements:['notes_free','videos_free','quiz_basic','ai_teacher','leaderboard'] },
+    { id:'plan-student-pro', name:'Student Pro', price:79, duration:'30 days', durationDays:30, featured:true, active:true, status:'published', displayOrder:2, features:['All Pro notes','All video lessons','Full PYQ solutions','More AI Teacher access'], entitlements:['notes_free','notes_premium','videos_free','videos_premium','pyq_basic','pyq_full','quiz_basic','quiz_premium','ai_teacher','ask_notes_ai','leaderboard'] },
+    { id:'plan-exam-pass', name:'Exam Pass', price:149, duration:'30 days', durationDays:30, featured:false, active:true, status:'published', displayOrder:3, features:['Exam-focused premium content','PYQ solutions','Premium quizzes','AI revision support'], entitlements:['notes_free','videos_free','pyq_basic','pyq_full','quiz_basic','quiz_premium','ai_teacher','exam_content','leaderboard'] },
+    { id:'plan-semester-pass', name:'Semester Pass', price:399, duration:'6 months', durationMonths:6, featured:false, active:true, status:'published', displayOrder:4, features:['Full-semester premium access','All notes & videos','PYQs & quizzes','Extended AI Teacher access'], entitlements:['notes_free','notes_premium','videos_free','videos_premium','pyq_basic','pyq_full','quiz_basic','quiz_premium','ai_teacher','ai_teacher_extended','ask_notes_ai','ai_viva','downloads','premium_resources','semester_content','leaderboard'] }
+  ];
+
+  const usable = db.plans.filter(p => p && (p.status === 'published' || p.active === true));
+  if (usable.length === 0) {
+    db.plans = defaults;
+    saveDB(db);
+  }
+}
+ensureDefaultPlans();
+
+function currentStudent(){
+  const s = getSession(); if(!s || s.role!=='student') return null;
+  const db = loadDB(); return db.students.find(x=>x.id===s.id) || null;
+}
+
+function toast(msg){
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(window.__toastT); window.__toastT = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+function nav(hash){ location.hash = hash; }
+function subjName(db,id){ return subjectName(db, id); }
+function ctxLine(db, it){
+  return [subjectName(db,it.subjectId), unitName(db,it.unitId), topicName(db,it.topicId)]
+    .filter(x=>x && x!=='—').map(esc).join(' · ') || '—';
+}
+function accessBadge(access){ return access==='pro' ? `<span class="pill pill-gold">Pro</span>` : `<span class="pill pill-green">Free</span>`; }
+function diffBadge(d){ const m={Easy:'pill-green',Medium:'pill-line',Hard:'pill-red'}; return `<span class="pill ${m[d]||'pill-line'}">${d||'Medium'}</span>`; }
+function studentAnnouncements(db, student){
+  return db.announcements.filter(a=> a.status==='published' && (
+    !a.target || a.target==='all' ||
+    (a.target==='free' && (!student.subscription || student.subscription==='free')) ||
+    (a.target==='paid' && student.subscription && student.subscription!=='free')));
+}
+
+function getPublishedPlans(db){
+  if (!db.plans || !Array.isArray(db.plans)) return [];
+  return db.plans.filter(p => p.status === 'published' || p.active === true || p.status === undefined).sort((a,b)=>(a.displayOrder||99)-(b.displayOrder||99));
+}
+
+function visibleForStudent(db, kind, student){
+  const list = db[kind] || [];
+  return list.filter(item => item.status === 'published' || item.status === undefined);
+}
+
+/* =========================================================================
+   ROUTER
+   ========================================================================= */
+function render(){
+  const hash = location.hash || '#/';
+  const app = document.getElementById('app');
+  const db = loadDB();
+
+  if(hash === '#/' || hash==='' ){ app.innerHTML = renderLanding(db); initLanding(); return; }
+  if(hash.startsWith('#/login')){ app.innerHTML = renderLogin(); initLogin(); return; }
+  if(hash.startsWith('#/admin')){ window.location.href='admin.html'; return; }
+  renderStudentRoute(hash, db, app);
+}
+window.addEventListener('hashchange', render);
+window.addEventListener('DOMContentLoaded', render);
+
+/* =========================================================================
+   LANDING PAGE
+   ========================================================================= */
+function renderLanding(db){
+  const activeClues = (db.mysteryClues||[]).filter(c=>c.active);
+  const plans = getPublishedPlans(db);
+
+  return `
+  <nav class="pubnav"><div class="wrap row">
+    <div class="brand"><div class="mark">A</div>${esc(db.settings.platformName)}</div>
+    <div class="pubnav-links">
+      <a href="#why">Why Alviora</a><a href="#mystery">The Mystery</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+    </div>
+    <div class="pubnav-cta">
+      <a class="btn btn-ghost btn-sm" href="#/login?role=admin">Admin</a>
+      <a class="btn btn-primary btn-sm" href="#/login">Start Learning</a>
+    </div>
+  </div></nav>
+
+  <header class="hero"><div class="wrap hero-grid">
+    <div>
+      <div class="hero-eyebrow">✦ An independent student learning platform</div>
+      <h1>Your campus knowledge.<br>Your AI teacher.<br><em>Your next level.</em></h1>
+      <p class="hero-sub">Notes, videos, PYQs, quizzes and AI-powered learning — built around the way students actually study. Made for curious minds.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#/login">Start Learning</a>
+        <a class="btn btn-ghost" href="#mystery">Explore the Mystery</a>
+      </div>
+      <div class="hero-proof">
+        <div><b>${published(db.subjects||[]).length}</b><span>Subjects live</span></div>
+        <div><b>${published(db.pyqs||[]).length + published(db.quizzes||[]).reduce((a,q)=>a+((q.questions||[]).length),0)}</b><span>Questions to practice</span></div>
+        <div><b>24/7</b><span>AI Teacher</span></div>
+      </div>
+    </div>
+    <div class="hero-stage">
+      <div class="blob" style="width:340px;height:340px;background:radial-gradient(circle,#DFDBFB,transparent 70%); top:10%; left:20%"></div>
+      <div class="float-card fc1">🤖 <b>AI Teacher</b><span class="muted">Ask anything, anytime</span></div>
+      <div class="float-card fc2">📚 <b>Notes</b><span class="muted">Topper-style, exam ready</span></div>
+      <div class="float-card fc3">🔥 <b>7-day streak</b><span class="muted">Keep it alive</span></div>
+      <div class="float-card fc4">📝 <b>PYQ Arena</b><span class="muted">10 questions, 10 minutes</span></div>
+      <div class="float-card fc5">⚡ <b>+540 XP</b><span class="muted">This week</span></div>
+    </div>
+  </div></header>
+
+  <section id="why"><div class="wrap">
+    <div class="section-head"><span class="eyebrow-label">Why Alviora</span>
+      <h2>Everything scattered across five tabs, in one place.</h2>
+      <p>Notes from three group chats, PYQs from a senior, doubts nobody answered — Alviora pulls it into a single, quietly well-organized system.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="card feature-card"><div class="feature-ic" style="background:var(--violet-tint)">📚</div><h4>Notes that respect your time</h4><p>Topper-style notes organized by unit and topic, not a folder dump.</p></div>
+      <div class="card feature-card"><div class="feature-ic" style="background:var(--gold-tint)">🎥</div><h4>Short, focused videos</h4><p>Concepts explained in minutes, not hour-long recordings.</p></div>
+      <div class="card feature-card"><div class="feature-ic" style="background:var(--green-tint)">📝</div><h4>Real previous-year questions</h4><p>Practice with actual PYQs, solved and explained.</p></div>
+      <div class="card feature-card"><div class="feature-ic" style="background:var(--red-tint)">🤖</div><h4>An AI teacher, on call</h4><p>Ask a doubt at midnight. Get an answer that actually helps.</p></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="strip">
+      <div><div class="num">Learn</div><h5>Structured by subject</h5><p>College → Subject → Unit → Topic, kept simple.</p></div>
+      <div><div class="num">Practice</div><h5>PYQ Arena</h5><p>Timed practice with score and weak-topic breakdown.</p></div>
+      <div><div class="num">Ask AI</div><h5>Explain, simplify, quiz me</h5><p>One AI Teacher, several ways to get unstuck.</p></div>
+      <div><div class="num">Progress</div><h5>Track what's sticking</h5><p>XP, streaks and a subject-by-subject progress view.</p></div>
+    </div>
+  </div></section>
+
+  <section id="mystery"><div class="wrap">
+    <div class="mystery-band"><div class="mystery-inner">
+      <div>
+        <span class="eyebrow-label">The Mystery</span>
+        <h2>Who is behind Alviora?</h2>
+        <p>Someone started building this after watching students dig through five different places for one answer. They're still here — quietly shipping notes, fixing explanations, and leaving a clue every few weeks. Some answers are meant to be discovered.</p>
+        <div class="hero-ctas" style="margin-top:24px"><a class="btn btn-primary" href="#/login">Find a Clue</a></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px">
+        ${activeClues.length? activeClues.slice(0,2).map(c=>`<div class="clue-card"><div class="tag">${esc(c.code)}</div><p>${esc(c.message)}</p></div>`).join('')
+          : `<div class="clue-card"><div class="tag">CLUE #00</div><p>No clues have been left yet. Check back soon.</p></div>`}
+      </div>
+    </div></div>
+  </div></section>
+
+  <section id="pricing"><div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px; text-align:center; max-width:560px">
+      <span class="eyebrow-label">Pricing</span>
+      <h2>Start free. Upgrade when it's worth it.</h2>
+    </div>
+    <div class="pricing-grid">
+      ${plans.length ? plans.map(p=>`
+        <div class="card price-card ${p.featured?'featured':''}">
+          ${p.featured?'<span class="pill pill-violet" style="align-self:flex-start">Most popular</span>':''}
+          <div><div style="font-weight:600">${esc(p.name)}</div>
+          <div class="amt">₹${p.price}<span> / ${esc(p.duration||'month')}</span></div></div>
+          <ul>${(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+          <button class="btn ${p.featured?'btn-primary':'btn-ghost'} btn-block" onclick="initiatePayment('${p.id}')">Get started</button>
+        </div>`).join('')
+      : `<div class="empty" style="grid-column:1/-1"><div class="ic">💎</div><h4>No plans published yet.</h4><p>Alviora is free to use while plans are being set up.</p></div>`}
+    </div>
+  </div></section>
+
+  <section id="faq"><div class="wrap">
+    <div class="section-head"><span class="eyebrow-label">FAQ</span><h2>Good to know</h2></div>
+    <div style="max-width:720px">
+      <details class="faq-item" open><summary>Is Alviora Learn officially run by my college?</summary><p>No. Alviora Learn is an independent student learning platform, not officially owned, operated or endorsed by any college. It's currently being tried out with MCET students.</p></details>
+      <details class="faq-item"><summary>Who made this?</summary><p>That's part of the fun — see The Mystery section above. What we will say: it's built by someone who cares more about whether it helps you study than about getting credit for it.</p></details>
+      <details class="faq-item"><summary>Can I use it for free?</summary><p>Yes. The Free plan includes a solid set of notes, videos and quizzes, plus 5 AI questions a day.</p></details>
+      <details class="faq-item"><summary>Do you store my payment details?</summary><p>No. Payments are processed securely via Razorpay and payment credentials are never stored on Alviora's servers.</p></details>
+    </div>
+  </div></section>
+
+  <footer class="pubfoot"><div class="wrap">
+    <div class="foot-row">
+      <div><div class="brand" style="margin-bottom:10px">${esc(db.settings.platformName)}</div><p class="muted" style="max-width:240px; font-size:.85rem">${esc(db.settings.tagline)}</p></div>
+      <div class="foot-links"><a href="#why">About</a><a href="#why">Features</a><a href="#pricing">Pricing</a><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    </div>
+    <div class="foot-bottom"><span>Built quietly. For students. · Development prototype — local data store</span><span>© ${new Date().getFullYear()} Alviora Learn</span></div>
+  </div></footer>
+  `;
+}
+function initLanding(){}
+
+/* =========================================================================
+   LOGIN / SIGNUP
+   ========================================================================= */
+function renderLogin(){
+  const params = new URLSearchParams((location.hash.split('?')[1]||''));
+  const role = params.get('role')==='admin' ? 'admin':'student';
+  return `
+  <div class="auth-wrap"><div class="auth-box">
+    <a class="back-link" href="#/">← Back to Alviora</a>
+    <div class="card">
+      <div class="brand" style="margin-bottom:22px; justify-content:center"><div class="mark">A</div>Alviora Learn</div>
+      <div class="auth-tabs">
+        <button id="tabStudent" class="${role==='student'?'active':''}" onclick="switchAuthRole('student')">Student</button>
+        <button id="tabAdmin" class="${role==='admin'?'active':''}" onclick="switchAuthRole('admin')">Admin</button>
+      </div>
+      <div id="authBody"></div>
+    </div>
+  </div></div>`;
+}
+let __authRole = 'student', __authMode = 'login';
+function initLogin(){
+  const params = new URLSearchParams((location.hash.split('?')[1]||''));
+  __authRole = params.get('role')==='admin' ? 'admin':'student';
+  __authMode = 'login';
+  renderAuthBody();
+}
+function switchAuthRole(role){ __authRole = role; __authMode='login';
+  document.getElementById('tabStudent').classList.toggle('active', role==='student');
+  document.getElementById('tabAdmin').classList.toggle('active', role==='admin');
+  renderAuthBody();
+}
+function renderAuthBody(){
+  const el = document.getElementById('authBody');
+  const db = loadDB();
+  if(__authRole==='admin'){
+    el.innerHTML = `
+      <div class="auth-hint"><b>Development build.</b> Admin access is verified locally in the browser only.</div>
+      <form onsubmit="return doAdminLogin(event)">
+        <div class="field"><label>Admin email</label><input name="email" type="email" placeholder="admin@alviora.app" required></div>
+        <div class="field"><label>Passcode</label><input name="password" type="password" placeholder="Development passcode" required></div>
+        <button class="btn btn-primary btn-block" type="submit">Login as Admin</button>
+      </form>`;
+    return;
+  }
+  if(__authMode==='login'){
+    el.innerHTML = `
+      <form onsubmit="return doStudentLogin(event)">
+        <div class="field"><label>Email or username</label><input name="email" placeholder="you@college.edu" required></div>
+        <div class="field"><label>Password</label><input name="password" type="password" placeholder="••••••••" required></div>
+        <button class="btn btn-primary btn-block" type="submit">Login as Student</button>
+      </form>
+      <div class="auth-switch">New here? <b onclick="__authMode='signup'; renderAuthBody()">Create an account</b></div>`;
+  } else {
+    const sems = db.semesters || [];
+    el.innerHTML = `
+      <form onsubmit="return doStudentSignup(event)">
+        <div class="field"><label>Full name</label><input name="name" required></div>
+        <div class="field"><label>Username</label><input name="username" placeholder="CodeNinja27" required></div>
+        <div class="field"><label>Email</label><input name="email" type="email" required></div>
+        <div class="field"><label>Password</label><input name="password" type="password" required></div>
+        <div class="field"><label>Semester</label>
+          ${sems.length ? `<select name="semesterId">${sems.map(s=>{
+              const c = byId(db.courses, s.courseId);
+              return `<option value="${s.id}">${esc((c? c.name+' — ':'') + s.name)}</option>`;
+            }).join('')}</select>`
+          : `<select name="semesterId" disabled><option value="">No semesters added yet</option></select>
+             <span class="faint" style="font-size:.75rem">Your admin hasn't added a course yet — you can join now and it'll be assigned later.</span>`}
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+      </form>
+      <div class="auth-switch">Already have an account? <b onclick="__authMode='login'; renderAuthBody()">Log in</b></div>`;
+  }
+}
+
+function doAdminLogin(e){
+  if(e) e.preventDefault();
+  const f = new FormData(e.target); const db = loadDB();
+  const email = String(f.get('email')||'').trim().toLowerCase();
+  const pass  = String(f.get('password')||'');
+  if(email !== String(db.adminAuth.email||'').toLowerCase() || pass !== db.adminAuth.devPasscode){
+    toast('Those admin details don\'t match.');
+    return false;
+  }
+  setSession({role:'admin', email:db.adminAuth.email, ts:nowISO()});
+  toast('Welcome back, Admin');
+  setTimeout(()=>{ window.location.href = 'admin.html'; }, 700);
+  return false;
+}
+
+function doStudentSignup(e){
+  e.preventDefault();
+  const f = new FormData(e.target); const db = loadDB();
+  const email = String(f.get('email')||'').trim();
+  const username = String(f.get('username')||'').trim();
+  if(db.students.some(s=>s.email.toLowerCase()===email.toLowerCase())){ toast('That email already has an account.'); return false; }
+  if(db.students.some(s=>s.username.toLowerCase()===username.toLowerCase())){ toast('That username is taken.'); return false; }
+
+  const semesterId = f.get('semesterId') || null;
+  const sem = semesterId ? byId(db.semesters, semesterId) : null;
+  const course = sem ? byId(db.courses, sem.courseId) : null;
+
+  const student = normalizeStudent({
+    id: uid('stu'),
+    name: String(f.get('name')||'').trim(),
+    username, email,
+    password: f.get('password'),
+    collegeId: course ? course.collegeId : null,
+    courseId: course ? course.id : null,
+    semesterId: sem ? sem.id : null,
+    subscription: 'free', planName: 'Free',
+    xp: 0, level: 1, streak: 0, longestStreak: 0,
+    status: 'active', createdAt: nowISO()
+  });
+  touchActivity(db, student);
+  db.students.push(student);
+  logActivity(db, student.id, 'signup', `${student.username} joined Alviora`);
+  saveDB(db);
+  setSession({role:'student', id:student.id});
+  toast('Account created — welcome!'); nav('#/dashboard');
+  return false;
+}
+
+function doStudentLogin(e){
+  e.preventDefault();
+  const f = new FormData(e.target); const db = loadDB();
+  const em = String(f.get('email')||'').toLowerCase();
+  const student = db.students.find(s=> s.email.toLowerCase()===em || s.username.toLowerCase()===em);
+  if(student && student.password===f.get('password')){
+    if(student.status==='suspended'){ toast('This account has been suspended.'); return false; }
+    const firstToday = student.lastActiveDay !== todayStr();
+    touchActivity(db, student);
+    if(firstToday){
+      awardXP(db, student, db.settings.xp.daily, 'Daily login');
+      logActivity(db, student.id, 'login', `${student.username} logged in`);
+    }
+    saveStudent(db, student);
+    setSession({role:'student', id:student.id}); toast('Welcome back, '+student.username); nav('#/dashboard');
+  } else { toast('No matching account. Try signing up.'); }
+  return false;
+}
+function logout(){ clearSession(); nav('#/'); }
+
+/* =========================================================================
+   STUDENT APP
+   ========================================================================= */
+const STUDENT_NAV = [
+  {href:'#/dashboard', ic:'🏠', label:'Home'},
+  {href:'#/notes', ic:'📚', label:'Notes'},
+  {href:'#/videos', ic:'🎥', label:'Videos'},
+  {href:'#/pyq', ic:'📝', label:'PYQ Arena'},
+  {href:'#/quiz', ic:'🧠', label:'Quizzes'},
+  {href:'#/ai', ic:'🤖', label:'AI Teacher'},
+  {href:'#/leaderboard', ic:'🏆', label:'Leaderboard'},
+  {href:'#/progress', ic:'📊', label:'My Progress'},
+  {href:'#/mystery', ic:'✦', label:'Mystery'},
+  {href:'#/bookmarks', ic:'🔖', label:'Saved'},
+  {href:'#/pricing', ic:'💎', label:'Upgrade'},
+  {href:'#/profile', ic:'👤', label:'Profile'},
+];
+const BOTTOM_NAV = ['#/dashboard','#/notes','#/quiz','#/ai','#/profile'];
+
+function renderStudentRoute(hash, db, app){
+  const session = getSession();
+  if(!session || session.role!=='student'){ nav('#/login'); return; }
+  const student = currentStudent();
+  if(!student){ clearSession(); nav('#/login'); return; }
+
+  const path = hash.split('?')[0];
+  let body = '';
+  if(path==='#/dashboard') body = viewStudentDashboard(db, student);
+  else if(path==='#/notes') body = viewList(db, student, 'notes', 'Notes', '📚');
+  else if(path.startsWith('#/notes/')) body = viewNoteDetail(db, student, path.split('/')[2]);
+  else if(path==='#/videos') body = viewList(db, student, 'videos', 'Videos', '🎥');
+  else if(path.startsWith('#/videos/')) body = viewVideoDetail(db, student, path.split('/')[2]);
+  else if(path==='#/pyq') body = viewList(db, student, 'pyqs', 'PYQ Arena', '📝');
+  else if(path.startsWith('#/pyq/')) body = viewPyqDetail(db, student, path.split('/')[2]);
+  else if(path==='#/quiz') body = viewList(db, student, 'quizzes', 'Quizzes', '🧠');
+  else if(path.startsWith('#/quiz-attempt/')) body = viewQuizAttempt(db, student, path.split('/')[2]);
+  else if(path.startsWith('#/quiz-result/')) body = viewQuizResult(db, student, path.split('/')[2]);
+  else if(path==='#/ai') body = viewAiTeacher(db, student);
+  else if(path==='#/leaderboard') body = viewLeaderboard(db, student);
+  else if(path==='#/progress') body = viewProgress(db, student);
+  else if(path==='#/mystery') body = viewMystery(db, student);
+  else if(path==='#/bookmarks') body = viewBookmarks(db, student);
+  else if(path==='#/pricing') body = viewPricing(db, student);
+  else if(path==='#/profile') body = viewProfile(db, student);
+  else body = `<div class="empty"><div class="ic">🧭</div><h4>Nothing here</h4><p>Try the dashboard.</p></div>`;
+
+  app.innerHTML = studentShell(db, student, path, body);
+  if(path.startsWith('#/quiz-attempt/')) initQuizTimer();
+}
+
+function studentShell(db, student, activePath, body){
+  const unread = studentAnnouncements(db, student).length;
+  return `
+  <div class="app-shell">
+    <aside class="side">
+      <div class="brand"><div class="mark">A</div>Alviora Learn</div>
+      <nav>${STUDENT_NAV.map(n=>`<a class="${activePath===n.href?'active':''}" href="${n.href}"><span class="ic">${n.ic}</span>${n.label}</a>`).join('')}</nav>
+      <div class="side-foot">
+        <div class="avatar">${esc((student.username||'U')[0].toUpperCase())}</div>
+        <div style="flex:1; min-width:0">
+          <div style="font-size:.84rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">${esc(student.username)}</div>
+          <div style="font-size:.72rem; color:var(--muted)">${student.subscription==='free'?'Free plan':'Pro member'}</div>
+        </div>
+        <button class="icon-sm" title="Log out" onclick="logout()">⏻</button>
+      </div>
+    </aside>
+    <div class="main">
+      <div class="topbar">
+        <div class="search">🔍 Search notes, videos, topics…</div>
+        <div class="topbar-right">
+          <div class="pill pill-gold">🔥 ${student.streak||0}</div>
+          <div class="pill pill-violet">⚡ ${student.xp||0} XP</div>
+          <button class="icon-btn" onclick="nav('#/profile')">${unread?'<span class="dot-badge"></span>':''}🔔</button>
+        </div>
+      </div>
+      <div class="content">${body}</div>
+    </div>
+  </div>
+  <div class="bottomnav">
+    ${BOTTOM_NAV.map(h=>{const n=STUDENT_NAV.find(x=>x.href===h); return `<a class="${activePath===h?'active':''}" href="${h}"><span class="ic">${n.ic}</span>${n.label}</a>`}).join('')}
+  </div>`;
+}
+
+function viewStudentDashboard(db, student){
+  const sem = (db.semesters||[]).find(s=>s.id===student.semesterId);
+  const subs = student.semesterId
+    ? published(db.subjects||[]).filter(s=>s.semesterId===student.semesterId)
+    : published(db.subjects||[]);
+  const recentActs = (db.activityLogs||[]).filter(a=>a.studentId===student.id).slice(0,6);
+  const anns = studentAnnouncements(db, student).slice(0,3);
+  const nNotes = visibleForStudent(db,'notes',student).length;
+  const nVideos = visibleForStudent(db,'videos',student).length;
+  const nQuizzes = visibleForStudent(db,'quizzes',student).length;
+  const pct = Math.min(100, Math.round(((student.xp||0)%100)));
+  return `
+  <div class="hello">
+    <div><h2>Welcome back, ${esc(student.name.split(' ')[0])} 👋</h2><p class="muted">${student.streak? `Your ${student.streak}-day streak is alive.` : 'Start a streak today — open any topic.'} ${sem? ' · '+esc(sem.name):''}</p></div>
+    <a class="btn btn-primary" href="#/notes">Continue Learning</a>
+  </div>
+  <div class="stat-row">
+    <div class="card stat-card"><div class="top"><span class="lbl">Streak</span><span class="ic">🔥</span></div><div class="val">${student.streak||0} days</div></div>
+    <div class="card stat-card"><div class="top"><span class="lbl">Total XP</span><span class="ic">⚡</span></div><div class="val">${student.xp||0}</div></div>
+    <div class="card stat-card"><div class="top"><span class="lbl">Level</span><span class="ic">🎖️</span></div><div class="val">${student.level||1}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div></div>
+    <div class="card stat-card"><div class="top"><span class="lbl">Plan</span><span class="ic">💎</span></div><div class="val" style="font-size:1.1rem">${student.subscription==='free'?'Free':esc(student.planName||'Pro')}</div></div>
+  </div>
+
+  <div class="quick-grid">
+    <a class="card quick-card" href="#/notes"><div class="ic" style="background:var(--violet-tint)">📚</div><div><h5>Notes</h5><span>${nNotes} available</span></div></a>
+    <a class="card quick-card" href="#/videos"><div class="ic" style="background:var(--gold-tint)">🎥</div><div><h5>Videos</h5><span>${nVideos} to watch</span></div></a>
+    <a class="card quick-card" href="#/pyq"><div class="ic" style="background:var(--green-tint)">📝</div><div><h5>PYQ Arena</h5><span>Practice real exam questions</span></div></a>
+    <a class="card quick-card" href="#/quiz"><div class="ic" style="background:var(--red-tint)">🧠</div><div><h5>Quizzes</h5><span>${nQuizzes} quizzes ready</span></div></a>
+    <a class="card quick-card" href="#/ai"><div class="ic" style="background:var(--violet-tint)">🤖</div><div><h5>AI Teacher</h5><span>Ask a doubt now</span></div></a>
+    <a class="card quick-card" href="#/leaderboard"><div class="ic" style="background:var(--gold-tint)">🏆</div><div><h5>Leaderboard</h5><span>See where you rank</span></div></a>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="section-title"><h3>Recent activity</h3></div>
+      <div class="card" style="padding:6px 20px">
+        ${recentActs.length? recentActs.map(a=>`<div class="activity-item"><div class="activity-ic">✦</div><div><div>${esc(a.text)}</div><span class="faint">${timeAgo(a.ts)}</span></div></div>`).join('')
+          : `<div class="empty"><div class="ic">🌱</div><h4>Nothing yet</h4><p>Open a note or take a quiz to get started.</p></div>`}
+      </div>
+      <div class="section-title"><h3>Subjects this semester</h3></div>
+      <div class="content-grid">
+        ${subs.length? subs.map(s=>`<div class="card res-card" onclick="nav('#/notes')"><div class="res-thumb">📘</div><h5>${esc(s.name)}</h5><span class="muted" style="font-size:.78rem">${esc(s.code||'—')}</span><div class="res-meta">${diffBadge(s.difficulty)}</div></div>`).join('')
+          : `<div class="empty" style="grid-column:1/-1"><div class="ic">📘</div><h4>No subjects yet.</h4><p>They'll appear here once your admin adds them.</p></div>`}
+      </div>
+    </div>
+    <div>
+      <div class="section-title"><h3>Announcements</h3></div>
+      ${anns.length? anns.map(a=>`<div class="announce-item"><b>${esc(a.title)}</b>${esc(a.message)}</div>`).join('') : `<div class="empty" style="padding:26px 12px"><div class="ic">📭</div><p>No announcements right now.</p></div>`}
+    </div>
+  </div>`;
+}
+
+function viewList(db, student, kind, title, ic){
+  const items = visibleForStudent(db, kind, student);
+  const subs = student.semesterId ? published(db.subjects||[]).filter(s=>s.semesterId===student.semesterId) : published(db.subjects||[]);
+  return `
+  <div class="page-head"><h2>${ic} ${title}</h2></div>
+  <div class="filter-row">
+    <select onchange="filterList()" data-kind="${kind}" id="subjFilter"><option value="">All subjects</option>${subs.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select>
+    <select onchange="filterList()" id="accFilter"><option value="">Free & Pro</option><option value="free">Free only</option><option value="pro">Pro only</option></select>
+  </div>
+  <div class="content-grid" id="listGrid">
+    ${items.length? items.map(it=>renderResCard(db, kind, it)).join(''): emptyState(kind)}
+  </div>`;
+}
+function emptyState(kind){
+  const map = {notes:['📭','No notes here yet.','Someone might be preparing them 👀'], videos:['🎬','No videos published yet.','Check back soon.'],
+    pyqs:['🗂️','No previous-year questions yet.','New sets are added regularly.'], quizzes:['🧠','No quizzes available yet.','Come back after class.']};
+  const [ic,h,p] = map[kind]||['📭','Nothing here yet.','Check back soon.'];
+  return `<div class="empty" style="grid-column:1/-1"><div class="ic">${ic}</div><h4>${h}</h4><p>${p}</p></div>`;
+}
+function renderResCard(db, kind, it){
+  const icons = {notes:'📄', videos:'▶️', pyqs:'🗂️', quizzes:'🧠'};
+  const link = kind==='notes'?`#/notes/${it.id}`: kind==='videos'?`#/videos/${it.id}`: kind==='pyqs'?`#/pyq/${it.id}`: `#/quiz-attempt/${it.id}`;
+  const title = it.title || it.question || 'Untitled';
+  return `<div class="card res-card" onclick="nav('${link}')">
+    <div class="res-thumb">${icons[kind]}</div>
+    <h5>${esc(title.length>70? title.slice(0,70)+'…': title)}</h5>
+    <span class="muted" style="font-size:.78rem">${ctxLine(db, it)}</span>
+    <div class="res-meta">${accessBadge(it.access)}${diffBadge(it.difficulty)}</div>
+    <div class="res-foot"><span>${it.year? it.year+' · '+esc(it.exam) : (it.questions? it.questions.length+' questions' : (it.views? it.views+' views':'New'))}</span><span>→</span></div>
+  </div>`;
+}
+function filterList(){
+  const subj = document.getElementById('subjFilter').value;
+  const acc = document.getElementById('accFilter').value;
+  const db = loadDB();
+  const kind = document.getElementById('subjFilter').dataset.kind;
+  const student = currentStudent();
+  let items = visibleForStudent(db, kind, student);
+  if(subj) items = items.filter(x=>x.subjectId===subj);
+  if(acc) items = items.filter(x=>x.access===acc);
+  document.getElementById('listGrid').innerHTML = items.length? items.map(it=>renderResCard(db,kind,it)).join(''): emptyState(kind);
+}
+
+function viewNoteDetail(db, student, id){
+  const n = (db.notes||[]).find(x=>x.id===id); if(!n) return `<div class="empty"><h4>Note not found</h4></div>`;
+  if(!canAccess(student, n)) return lockedView(n.title, 'note');
+  markViewed(db, student, 'completedNotes', n.id, 'note', n.title, db.settings.xp.note);
+  const bookmarked = (student.bookmarks||[]).includes(n.id);
+  return `
+  <a class="back-link" href="#/notes">← All notes</a>
+  <div class="detail-head"><div class="res-meta" style="margin-bottom:10px">${accessBadge(n.access)}${diffBadge(n.difficulty)}${n.important?'<span class="pill pill-gold">Important</span>':''}</div>
+  <h2>${esc(n.title)}</h2><p class="muted" style="margin-top:6px">${ctxLine(db,n)}</p></div>
+  <div class="card" style="padding:24px; margin-bottom:20px">
+    <div class="prose">${n.description? `<p>${esc(n.description)}</p>`:''}
+    ${n.content? esc(n.content).split(/\n{2,}/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('')
+      : (n.description? '' : `<p class="muted">This note has no body content yet.</p>`)}</div>
+  </div>
+  <div style="display:flex; gap:10px">
+    <button class="btn btn-soft" onclick="toggleBookmark('${n.id}')">${bookmarked?'★ Bookmarked':'☆ Bookmark'}</button>
+    <a class="btn btn-ghost" href="#/ai">Ask AI about this</a>
+  </div>`;
+}
+
+function viewVideoDetail(db, student, id){
+  const v = (db.videos||[]).find(x=>x.id===id); if(!v) return `<div class="empty"><h4>Video not found</h4></div>`;
+  if(!canAccess(student, v)) return lockedView(v.title, 'video');
+  markViewed(db, student, 'completedVideos', v.id, 'video', v.title, db.settings.xp.video);
+  const bookmarked = (student.bookmarks||[]).includes(v.id);
+  return `
+  <a class="back-link" href="#/videos">← All videos</a>
+  <div class="detail-head"><div class="res-meta" style="margin-bottom:10px">${accessBadge(v.access)}${diffBadge(v.difficulty)}</div>
+  <h2>${esc(v.title)}</h2><p class="muted" style="margin-top:6px">${ctxLine(db,v)}${v.duration? ' · '+esc(v.duration):''}</p></div>
+  <div class="iframe-wrap"><iframe src="https://www.youtube.com/embed/${esc(v.youtubeId)}" title="${esc(v.title)}" allowfullscreen></iframe></div>
+  <div class="prose" style="margin-bottom:20px">${v.description? `<p>${esc(v.description)}</p>`:''}</div>
+  <button class="btn btn-soft" onclick="toggleBookmark('${v.id}')">${bookmarked?'★ Bookmarked':'☆ Bookmark'}</button>`;
+}
+
+function viewPyqDetail(db, student, id){
+  const p = (db.pyqs||[]).find(x=>x.id===id); if(!p) return `<div class="empty"><h4>PYQ not found</h4></div>`;
+  if(!canAccess(student, p)) return lockedView(p.question, 'pyq');
+  return `
+  <a class="back-link" href="#/pyq">← PYQ Arena</a>
+  <div class="detail-head"><div class="res-meta" style="margin-bottom:10px">${accessBadge(p.access)}${diffBadge(p.difficulty)}<span class="pill pill-line">${p.year||'2025'} · ${esc(p.exam||'Exam')}</span><span class="pill pill-line">${p.marks||10} marks</span></div>
+  <h2>${esc(p.question)}</h2><p class="muted" style="margin-top:6px">${ctxLine(db,p)}</p></div>
+  <div class="card" style="padding:22px; margin-bottom:16px"><label style="margin-bottom:10px">Your answer (self-check)</label><textarea id="pyqAns" placeholder="Write your answer, then reveal the model answer to compare."></textarea></div>
+  <div style="display:flex; gap:10px; margin-bottom:20px">
+    <button class="btn btn-primary" onclick="revealPyq('${p.id}')">Reveal model answer</button>
+    <button class="btn btn-soft" onclick="toggleBookmark('${p.id}')">${(student.bookmarks||[]).includes(p.id)?'★ Bookmarked':'☆ Bookmark'}</button>
+  </div>
+  <div id="pyqReveal"></div>`;
+}
+function revealPyq(id){
+  const db = loadDB(); const student = currentStudent();
+  const p = db.pyqs.find(x=>x.id===id);
+  document.getElementById('pyqReveal').innerHTML = `
+    <div class="card" style="padding:20px; border-color:var(--green)">
+      <b style="color:var(--green); font-size:.8rem">Model answer</b>
+      <p class="prose" style="margin-top:8px">${esc(p.answer||'No model answer has been added yet.')}</p>
+      ${p.explanation? `<b style="color:var(--violet); font-size:.8rem; display:block; margin-top:14px">Why this scores well</b>
+      <p class="prose" style="margin-top:6px">${esc(p.explanation)}</p>`:''}
+    </div>`;
+  if(!(student.pyqAttempts||[]).includes(id)){
+    student.pyqAttempts = student.pyqAttempts||[]; student.pyqAttempts.push(id);
+    awardXP(db, student, db.settings.xp.pyq, 'PYQ attempted: '+(topicName(db,p.topicId)||'PYQ'));
+    logActivity(db, student.id, 'pyq', `Attempted PYQ: ${p.question.slice(0,60)}`);
+    saveStudent(db, student); toast('+'+db.settings.xp.pyq+' XP');
+  }
+}
+function markViewed(db, student, field, itemId, type, title, xp){
+  const bucket = type==='note' ? db.notes : db.videos;
+  const item = (bucket||[]).find(x=>x.id===itemId);
+  if(item){ item.views = (item.views||0)+1; }
+  logActivity(db, student.id, type, `Opened ${type}: ${title}`);
+  student[field] = student[field]||[];
+  const firstTime = !student[field].includes(itemId);
+  if(firstTime){
+    student[field].push(itemId);
+    if(item) item.completions = (item.completions||0)+1;
+    awardXP(db, student, xp, `${type==='note'?'Note':'Video'} completed: ${title}`);
+    logActivity(db, student.id, type, `Completed ${type}: ${title}`);
+  } else { touchActivity(db, student); }
+  saveStudent(db, student);
+  if(firstTime) setTimeout(()=>toast('+'+xp+' XP earned'), 300);
+}
+function lockedView(title, kind){
+  return `<div class="empty"><div class="ic">🔒</div><h4>Not included in your current plan</h4><p>${esc(title)}</p><a class="btn btn-primary" style="margin-top:14px" href="#/pricing">View Plans</a></div>`;
+}
+function toggleBookmark(id){
+  const db = loadDB(); const student = currentStudent();
+  student.bookmarks = student.bookmarks||[];
+  const i = student.bookmarks.indexOf(id);
+  ['notes','videos','pyqs'].forEach(k=>{ const it=(db[k]||[]).find(x=>x.id===id); if(it) it.bookmarks = Math.max(0,(it.bookmarks||0) + (i>-1?-1:1)); });
+  if(i>-1){ student.bookmarks.splice(i,1); toast('Removed bookmark'); logActivity(db, student.id,'bookmark','Removed a bookmark'); }
+  else { student.bookmarks.push(id); toast('Bookmarked'); logActivity(db, student.id,'bookmark','Bookmarked an item'); }
+  touchActivity(db, student); saveStudent(db, student); render();
+}
+
+/* ---- quiz flow ---- */
+let __quizState = null;
+function viewQuizAttempt(db, student, quizId){
+  const quiz = (db.quizzes||[]).find(q=>q.id===quizId); if(!quiz) return `<div class="empty"><h4>Quiz not found</h4></div>`;
+  if(!canAccess(student, quiz)) return lockedView(quiz.title,'quiz');
+  if(!__quizState || __quizState.quizId!==quizId){
+    __quizState = { quizId, idx:0, answers:{}, timeLeft: quiz.timeLimit||600, startedAt:Date.now() };
+  }
+  const q = quiz.questions[__quizState.idx];
+  const sel = __quizState.answers[q.id];
+  return `
+  <a class="back-link" href="#/quiz">← Quizzes</a>
+  <div class="quiz-progress"><span>${esc(quiz.title)}</span><span id="quizTimer">⏱ ${fmtTime(__quizState.timeLeft)}</span></div>
+  <div class="bar-track" style="margin-bottom:24px"><div class="bar-fill" style="width:${((__quizState.idx)/quiz.questions.length)*100}%"></div></div>
+  <h3 style="margin-bottom:18px">${__quizState.idx+1}. ${esc(q.q)}</h3>
+  <div id="optsWrap">${(q.options||[]).map((o,i)=>`<div class="opt ${sel===i?'selected':''}" onclick="selectQuizOpt(${i})"><span class="letter">${String.fromCharCode(65+i)}</span>${esc(o)}</div>`).join('')}</div>
+  <div style="display:flex; justify-content:space-between; margin-top:20px">
+    <button class="btn btn-ghost" ${__quizState.idx===0?'disabled':''} onclick="quizNav(-1)">Back</button>
+    <button class="btn btn-primary" onclick="quizNav(1)">${__quizState.idx===quiz.questions.length-1?'Finish':'Next'}</button>
+  </div>`;
+}
+function selectQuizOpt(i){ __quizState.answers[currentQuizQuestion().id]=i; render(); }
+function currentQuizQuestion(){ const db=loadDB(); const quiz = db.quizzes.find(q=>q.id===__quizState.quizId); return quiz.questions[__quizState.idx]; }
+function quizNav(dir){
+  const db = loadDB(); const quiz = db.quizzes.find(q=>q.id===__quizState.quizId);
+  if(dir===1 && __quizState.idx===quiz.questions.length-1){ finishQuiz(); return; }
+  __quizState.idx = Math.max(0, Math.min(quiz.questions.length-1, __quizState.idx+dir));
+  render();
+}
+function fmtTime(s){ s=Math.max(0,s); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function initQuizTimer(){
+  clearInterval(window.__qTimer);
+  window.__qTimer = setInterval(()=>{
+    if(!__quizState) return clearInterval(window.__qTimer);
+    __quizState.timeLeft--;
+    const el = document.getElementById('quizTimer'); if(el) el.textContent = '⏱ '+fmtTime(__quizState.timeLeft);
+    if(__quizState.timeLeft<=0){ clearInterval(window.__qTimer); finishQuiz(); }
+  },1000);
+}
+function finishQuiz(){
+  clearInterval(window.__qTimer);
+  const db = loadDB(); const student = currentStudent(); const quiz = db.quizzes.find(q=>q.id===__quizState.quizId);
+  let correct=0, xp=0;
+  quiz.questions.forEach(q=>{ if(__quizState.answers[q.id]===q.correct){ correct++; xp += (q.marks||1); } });
+  const total = quiz.questions.length;
+  const score = Math.round((correct/total)*100);
+  const attempt = { id:uid('att'), quizId:quiz.id, quizTitle:quiz.title, score, correct, total, xp, ts:nowISO(), answers:__quizState.answers };
+  student.quizAttempts = student.quizAttempts||[]; student.quizAttempts.push(attempt);
+  quiz.attempts = (quiz.attempts||0)+1;
+  awardXP(db, student, xp || db.settings.xp.quiz, 'Quiz: '+quiz.title);
+  logActivity(db, student.id, 'quiz', `Completed quiz: ${quiz.title} (${score}%)`);
+  saveStudent(db, student); saveDB(db);
+  sessionStorage.setItem('lastQuizResult', JSON.stringify({quizId:quiz.id, ...attempt}));
+  __quizState = null;
+  nav('#/quiz-result/'+quiz.id);
+}
+function viewQuizResult(db, student, quizId){
+  const quiz = (db.quizzes||[]).find(q=>q.id===quizId);
+  const raw = sessionStorage.getItem('lastQuizResult');
+  const r = raw? JSON.parse(raw): (student.quizAttempts||[]).filter(a=>a.quizId===quizId).slice(-1)[0];
+  if(!r) return `<div class="empty"><h4>No result to show</h4><a class="btn btn-primary" href="#/quiz">Back to quizzes</a></div>`;
+  return `
+  <div class="card result-hero">
+    <div class="result-ring" style="--pct:${r.score}"><span>${r.score}%</span></div>
+    <h3>${r.correct} of ${r.total} correct</h3>
+    <p class="muted" style="margin-top:6px">+${r.xp||5} XP earned on ${esc(quiz.title)}</p>
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:22px">
+      <a class="btn btn-ghost" href="#/quiz">All quizzes</a>
+      <a class="btn btn-primary" href="#/ai">Ask AI about weak spots</a>
+    </div>
+  </div>
+  <div class="section-title"><h3>Review</h3></div>
+  ${quiz.questions.map((q,i)=>{
+    const sel = r.answers[q.id]; const ok = sel===q.correct;
+    return `<div class="card" style="padding:18px; margin-bottom:12px">
+      <div style="font-size:.82rem; font-weight:700; color:${ok?'var(--green)':'var(--red)'}; margin-bottom:6px">${ok?'✓ Correct':'✗ Incorrect'}</div>
+      <b>${i+1}. ${esc(q.q)}</b>
+      <p class="muted" style="font-size:.85rem; margin-top:6px">Your answer: ${sel!==undefined? esc(q.options[sel]):'Skipped'} · Correct answer: ${esc(q.options[q.correct])}</p>
+      ${q.explanation? `<p style="font-size:.82rem; margin-top:8px; color:var(--violet)">${esc(q.explanation)}</p>`:''}
+    </div>`;
+  }).join('')}`;
+}
+
+/* ---- AI Teacher view ---- */
+let __chatHistory = [];
+function viewAiTeacher(db, student){
+  if(!__chatHistory.length){
+    __chatHistory = [{ role:'assistant', content:`Hi ${student.name.split(' ')[0]}! I'm your Alviora AI Teacher. Ask me anything from your syllabus, or pick a quick option below:` }];
+  }
+  return `
+  <div class="page-head"><h2>🤖 AI Teacher</h2><span class="pill pill-violet">Gemini 2.5 Flash</span></div>
+  <div class="chat-wrap">
+    <div class="chat-msgs" id="chatMsgs">${__chatHistory.map(m=>`<div class="msg ${m.role==='user'?'user':'ai'}">${m.role==='assistant'?'<b>AI TEACHER</b>':''}${esc(m.content)}</div>`).join('')}</div>
+    <div class="chat-actions">
+      <button class="chip" onclick="quickAi('Explain TCP vs UDP in simple terms')">Explain TCP vs UDP</button>
+      <button class="chip" onclick="quickAi('Give me a 3-question mini quiz on Operating Systems')">Mini OS Quiz</button>
+      <button class="chip" onclick="quickAi('How should I prepare for semester exams in 7 days?')">7-day exam strategy</button>
+    </div>
+    <form class="chat-input" onsubmit="return sendAiMessage(event)">
+      <input id="aiInput" placeholder="Ask a doubt, request a summary, or get a practice question…" autocomplete="off" required>
+      <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+  </div>`;
+}
+function quickAi(txt){
+  document.getElementById('aiInput').value = txt;
+  sendAiMessage();
+}
+async function sendAiMessage(e){
+  if(e) e.preventDefault();
+  const input = document.getElementById('aiInput');
+  const txt = input.value.trim(); if(!txt) return false;
+  const db = loadDB(); const student = currentStudent();
+
+  input.value = '';
+  __chatHistory.push({role:'user', content:txt});
+  renderAiMsgs();
+
+  const loadingMsg = {role:'assistant', content:'Thinking...'};
+  __chatHistory.push(loadingMsg);
+  renderAiMsgs();
+
+  try {
+    const sysPrompt = "You are Alviora AI Teacher, a friendly, clear, and highly encouraging academic mentor for college students in India. Explain concepts concisely with examples, formatting key points cleanly.";
+    const msgs = [{role:'system', content:sysPrompt}, ...__chatHistory.slice(0, -1)];
+    
+    let reply = await fetchOpenRouterAI(msgs, AI_CONFIG.primaryKey);
+    if(!reply){
+      reply = await fetchOpenRouterAI(msgs, AI_CONFIG.backupKey);
+    }
+    __chatHistory[__chatHistory.length - 1].content = reply || "I'm having trouble connecting to my service right now. Please try again in a moment.";
+  } catch(err) {
+    __chatHistory[__chatHistory.length - 1].content = "An unexpected error occurred. Please try again.";
+  }
+
+  awardXP(db, student, db.settings.xp.ai, 'AI Question');
+  logActivity(db, student.id, 'ai', `Asked AI Teacher: ${txt.slice(0,40)}`);
+  saveStudent(db, student);
+  renderAiMsgs();
+  return false;
+}
+function renderAiMsgs(){
+  const wrap = document.getElementById('chatMsgs');
+  if(!wrap) return;
+  wrap.innerHTML = __chatHistory.map(m=>`<div class="msg ${m.role==='user'?'user':'ai'}">${m.role==='assistant'?'<b>AI TEACHER</b>':''}${esc(m.content)}</div>`).join('');
+  wrap.scrollTop = wrap.scrollHeight;
+}
+async function fetchOpenRouterAI(messages, apiKey){
+  try {
+    const res = await fetch(AI_CONFIG.endpoint, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": window.location.href,
+        "X-Title": "Alviora Learn"
+      },
+      body: JSON.stringify({
+        model: AI_CONFIG.model,
+        messages: messages.map(m => ({role: m.role==='assistant'?'assistant':m.role, content: m.content}))
+      })
+    });
+    if(!res.ok) return null;
+    const data = await res.json();
+    return data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : null;
+  } catch(e){
+    return null;
+  }
+}
+
+function viewLeaderboard(db, student){
+  const sorted = [...(db.students||[])].sort((a,b)=>(b.xp||0)-(a.xp||0)).slice(0,20);
+  return `
+  <div class="page-head"><h2>🏆 Leaderboard</h2><p class="muted">Top learners across Alviora</p></div>
+  <div class="card table-wrap">
+    <table>
+      <thead><tr><th>Rank</th><th>Student</th><th>Streak</th><th>Level</th><th>XP</th></tr></thead>
+      <tbody>
+        ${sorted.map((s,i)=>`
+          <tr style="${s.id===student.id?'background:var(--violet-tint); font-weight:600':''}">
+            <td>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1)}</td>
+            <td>${esc(s.username)} ${s.id===student.id?'(You)':''}</td>
+            <td>🔥 ${s.streak||0}</td>
+            <td>🎖️ ${s.level||1}</td>
+            <td><b>⚡ ${s.xp||0}</b></td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function viewProgress(db, student){
+  const notesCount = (student.completedNotes||[]).length;
+  const videosCount = (student.completedVideos||[]).length;
+  const pyqCount = (student.pyqAttempts||[]).length;
+  const quizCount = (student.quizAttempts||[]).length;
+  return `
+  <div class="page-head"><h2>📊 My Progress</h2></div>
+  <div class="stat-row">
+    <div class="card stat-card"><div class="lbl">Notes Read</div><div class="val">${notesCount}</div></div>
+    <div class="card stat-card"><div class="lbl">Videos Watched</div><div class="val">${videosCount}</div></div>
+    <div class="card stat-card"><div class="lbl">PYQs Practiced</div><div class="val">${pyqCount}</div></div>
+    <div class="card stat-card"><div class="lbl">Quizzes Taken</div><div class="val">${quizCount}</div></div>
+  </div>
+  <div class="section-title"><h3>Recent Quiz Scores</h3></div>
+  <div class="card" style="padding:16px 20px">
+    ${(student.quizAttempts||[]).length ? (student.quizAttempts||[]).slice(-5).reverse().map(q=>`
+      <div class="activity-item">
+        <div class="activity-ic">🧠</div>
+        <div style="flex:1">
+          <b>${esc(q.quizTitle)}</b>
+          <div class="faint">${timeAgo(q.ts)}</div>
+        </div>
+        <div style="font-weight:700; color:${q.score>=70?'var(--green)':'var(--gold)'}">${q.score}%</div>
+      </div>`).join('')
+    : `<div class="empty"><p>No quizzes taken yet.</p></div>`}
+  </div>`;
+}
+
+function viewMystery(db, student){
+  const clues = (db.mysteryClues||[]).filter(c=>c.active);
+  return `
+  <div class="page-head"><h2>✦ The Alviora Mystery</h2><p class="muted">Fragmented clues left behind across system releases.</p></div>
+  <div class="card" style="padding:28px; background:linear-gradient(150deg,#1B1730,#2A2270); color:#fff; margin-bottom:24px">
+    <h3 style="color:#fff; margin-bottom:8px">Who constructed Alviora?</h3>
+    <p style="color:#C9C6E6; font-size:.95rem">Solve the hints published below. Every clue leads closer to uncovering the original author.</p>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:14px">
+    ${clues.length? clues.map(c=>`
+      <div class="card" style="padding:20px; border-left:4px solid var(--violet)">
+        <span class="pill pill-violet" style="margin-bottom:8px">${esc(c.code)}</span>
+        <p style="font-size:1rem; font-weight:500">${esc(c.message)}</p>
+        <span class="faint" style="font-size:.78rem; display:block; margin-top:8px">Revealed ${timeAgo(c.createdAt)}</span>
+      </div>`).join('')
+    : `<div class="empty"><p>No active clues found in current build.</p></div>`}
+  </div>`;
+}
+
+function viewPricing(db, student){
+  const plans = getPublishedPlans(db);
+  return `
+  <div class="page-head"><h2>💎 Premium Plans</h2><p class="muted">Upgrade your account for full access</p></div>
+  <div class="pricing-grid">
+    ${plans.length ? plans.map(p=>`
+      <div class="card price-card ${p.featured?'featured':''}">
+        ${p.featured?'<span class="pill pill-violet" style="align-self:flex-start">Most popular</span>':''}
+        <div>
+          <div style="font-weight:600">${esc(p.name)}</div>
+          <div class="amt">₹${p.price}<span> / ${esc(p.duration||'month')}</span></div>
+        </div>
+        <ul>${(p.features||[]).map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+        <button class="btn ${p.featured?'btn-primary':'btn-ghost'} btn-block" onclick="initiatePayment('${p.id}')">
+          ${getEffectiveSubscription(student.id).plan && getEffectiveSubscription(student.id).plan.id===p.id ? 'Current Plan' : 'Get started'}
+        </button>
+      </div>`).join('')
+    : `<div class="empty" style="grid-column:1/-1"><div class="ic">💎</div><h4>No plans published yet.</h4></div>`}
+  </div>`;
+}
+
+function viewBookmarks(db, student){
+  const bks = student.bookmarks||[];
+  const all = [...(db.notes||[]), ...(db.videos||[]), ...(db.pyqs||[])].filter(x=>bks.includes(x.id));
+  return `
+  <div class="page-head"><h2>🔖 Saved Resources</h2></div>
+  <div class="content-grid">
+    ${all.length? all.map(it=>{
+      const kind = (db.notes||[]).includes(it)?'notes': (db.videos||[]).includes(it)?'videos':'pyqs';
+      return renderResCard(db, kind, it);
+    }).join('') : `<div class="empty" style="grid-column:1/-1"><div class="ic">🔖</div><h4>No saved items</h4><p>Click "Bookmark" on any note, video, or PYQ to save it here.</p></div>`}
+  </div>`;
+}
+
+function viewProfile(db, student){
+  return `
+  <div class="page-head"><h2>👤 Profile & Account</h2></div>
+  <div class="card" style="padding:24px; max-width:600px; margin-bottom:20px">
+    <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px">
+      <div class="avatar" style="width:56px; height:56px; font-size:1.4rem">${esc((student.username||'U')[0].toUpperCase())}</div>
+      <div>
+        <h3 style="margin-bottom:2px">${esc(student.name)}</h3>
+        <p class="muted">@${esc(student.username)} · ${student.email}</p>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; font-size:.9rem">
+      <div><span class="muted">Plan:</span> <b>${student.subscription==='free'?'Free Tier':esc(student.planName||'Pro Member')}</b></div>
+      <div><span class="muted">Joined:</span> <b>${student.createdAt? student.createdAt.split('T')[0]:'Recently'}</b></div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="logout()">Log Out</button>
+  </div>`;
+}
+</script>
+</body>
+</html>
